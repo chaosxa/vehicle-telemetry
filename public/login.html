@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in - Fleet telemetry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="shell">
+    <section class="brand">
+      <h1>Fleet telemetry</h1>
+      <p>Live speed, battery and engine data from your vehicles, with alerts when a limit is crossed.</p>
+      <svg viewBox="0 0 200 110" aria-hidden="true">
+        <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#2a3b4b" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 20 100 A 80 80 0 0 1 130 32" fill="none" stroke="#2fa4c7" stroke-width="14" stroke-linecap="round"/>
+      </svg>
+    </section>
+
+    <section class="formside">
+      <form id="form">
+        <h2>Log in to your dashboard</h2>
+        <label for="username">Username</label>
+        <input id="username" autocomplete="username" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <p class="hint">At least 6 characters.</p>
+        <div class="row">
+          <button class="primary" type="submit" id="loginBtn">Log in</button>
+          <button class="secondary" type="button" id="registerBtn">Create account</button>
+        </div>
+        <div id="msg" role="alert"></div>
+      </form>
+    </section>
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

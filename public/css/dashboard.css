@@ -1,0 +1,112 @@
+:root {
+  --bg: #e8ecf0;
+  --panel: #f7f9fb;
+  --line: #cdd6de;
+  --ink: #16222e;
+  --muted: #5d6b78;
+  --navy: #13212f;
+  --navy-ink: #e9f0f5;
+  --blue: #2fa4c7;
+  --amber: #e0961a;
+  --red: #d64545;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  line-height: 1.4;
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding: 20px 16px 40px; }
+
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+}
+h1 {
+  margin: 0; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-size: 32px; font-weight: 700; letter-spacing: 0.01em;
+}
+.sub { color: var(--muted); font-size: 14px; }
+.tools { display: flex; align-items: center; gap: 14px; font-size: 14px; }
+.status { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--amber); }
+.dot.live { background: #27a86b; }
+button.ghost {
+  font: inherit; font-size: 14px; padding: 6px 12px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--panel); border-radius: 6px; color: var(--ink);
+}
+button.ghost:hover { background: #fff; }
+button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+.main { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; }
+.side { display: grid; gap: 16px; align-content: start; }
+
+.panel {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; padding: 16px 18px;
+}
+.panel h2 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.big {
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-size: 46px; font-weight: 600; line-height: 1;
+}
+.unit { font-size: 18px; color: var(--muted); margin-left: 4px; font-weight: 500; }
+.note { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+
+/* Speed gauge: the one standout element */
+.gauge {
+  background: var(--navy); color: var(--navy-ink);
+  border-radius: 14px; padding: 20px 24px 18px;
+}
+.gauge h2 { margin: 0 0 4px; font-size: 14px; font-weight: 600; color: #9fb2c2; }
+.gauge svg { display: block; width: 100%; max-width: 420px; margin: 0 auto; }
+.gauge .note { color: #9fb2c2; text-align: center; }
+.track { stroke: #2a3b4b; }
+.arc { stroke: var(--blue); transition: stroke-dashoffset 0.4s ease, stroke 0.3s; }
+.arc.over { stroke: var(--amber); }
+
+/* Battery */
+.segs { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-top: 14px; }
+.segs span { height: 12px; border-radius: 2px; background: #dbe2e8; }
+.segs span.on { background: var(--blue); }
+.segs.low span.on { background: var(--amber); }
+
+/* Engine temperature */
+.scale {
+  position: relative; height: 10px; border-radius: 5px; margin-top: 18px;
+  background: linear-gradient(90deg, #9ccfe0 0 50%, #f0c36a 50% 75%, #e58b84 75% 100%);
+}
+.pin {
+  position: absolute; top: -5px; width: 4px; height: 20px; left: 0;
+  background: var(--ink); border-radius: 2px; transform: translateX(-50%);
+  transition: left 0.4s ease;
+}
+.hot { color: var(--red); }
+
+.pos { font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+.chartbox { position: relative; height: 260px; }
+.wide { margin-top: 16px; }
+
+ul.alerts { list-style: none; margin: 0; padding: 0; }
+ul.alerts li {
+  display: grid; grid-template-columns: 90px 120px 1fr; gap: 10px;
+  padding: 9px 0; border-top: 1px solid var(--line); align-items: baseline;
+}
+ul.alerts li:first-child { border-top: none; }
+.time { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.tag { font-weight: 600; font-size: 14px; }
+.tag.warn { color: #a8700d; }
+.tag.crit { color: var(--red); }
+.empty { margin: 0; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 760px) {
+  .main { grid-template-columns: 1fr; }
+  ul.alerts li { grid-template-columns: auto 1fr; }
+  ul.alerts li .msg { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

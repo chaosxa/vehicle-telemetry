@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fleet telemetry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Fleet telemetry</h1>
+        <div class="sub">Vehicle <span id="vehicle">VEH-001</span></div>
+      </div>
+      <div class="tools">
+        <span class="status" aria-live="polite"><span class="dot" id="dot"></span><span id="statusText">Connecting</span></span>
+        <span id="user"></span>
+        <button class="ghost" id="logoutBtn">Log out</button>
+      </div>
+    </header>
+
+    <div class="main">
+      <section class="gauge" aria-label="Speed">
+        <h2>Speed</h2>
+        <svg viewBox="0 0 200 124" role="img" aria-label="Speed gauge">
+          <path class="track" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke-width="14" stroke-linecap="round"/>
+          <path class="arc" id="arc" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke-width="14"
+                stroke-linecap="round" stroke-dasharray="251.33" stroke-dashoffset="251.33"/>
+          <line x1="150.9" y1="49.1" x2="163.6" y2="36.4" stroke="#e9f0f5" stroke-width="2"/>
+          <text x="100" y="96" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif"
+                font-size="48" font-weight="600" fill="#e9f0f5" id="speed">0</text>
+          <text x="100" y="114" text-anchor="middle" font-size="11" fill="#9fb2c2">km/h</text>
+          <text x="20" y="118" text-anchor="middle" font-size="9" fill="#9fb2c2">0</text>
+          <text x="180" y="118" text-anchor="middle" font-size="9" fill="#9fb2c2">120</text>
+        </svg>
+        <p class="note">The tick marks the 90 km/h alert limit.</p>
+      </section>
+
+      <div class="side">
+        <section class="panel" aria-label="Battery">
+          <h2>Battery</h2>
+          <div class="big"><span id="battery">0</span><span class="unit">%</span></div>
+          <div class="segs" id="segs"></div>
+          <p class="note">Alert below 20%.</p>
+        </section>
+
+        <section class="panel" aria-label="Engine temperature">
+          <h2>Engine temperature</h2>
+          <div class="big" id="tempWrap"><span id="temp">0</span><span class="unit">&deg;C</span></div>
+          <div class="scale"><div class="pin" id="pin"></div></div>
+          <p class="note">Scale 60 to 120 &deg;C. Alert above 105 &deg;C.</p>
+        </section>
+
+        <section class="panel" aria-label="Position">
+          <h2>Position</h2>
+          <div class="pos" id="loc">Waiting for data</div>
+        </section>
+      </div>
+    </div>
+
+    <section class="panel wide" aria-label="Speed and temperature history">
+      <h2>Last 30 seconds</h2>
+      <div class="chartbox"><canvas id="chart"></canvas></div>
+    </section>
+
+    <section class="panel wide" aria-label="Alerts">
+      <h2>Alerts</h2>
+      <p class="empty" id="empty">No alerts yet. They appear when speed, temperature or battery cross their limits.</p>
+      <ul class="alerts" id="alerts"></ul>
+    </section>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
